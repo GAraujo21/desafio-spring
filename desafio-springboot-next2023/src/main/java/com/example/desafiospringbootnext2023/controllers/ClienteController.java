@@ -94,7 +94,6 @@ public class ClienteController {
             //clienteExistente.setHouses(cliente.getHouses());
             //clienteExistente.setVehicles(cliente.getVehicles());
             
-
             Cliente clienteAtualizado = clienteRepository.save(clienteExistente);
             return ResponseEntity.ok(clienteAtualizado);
         }
