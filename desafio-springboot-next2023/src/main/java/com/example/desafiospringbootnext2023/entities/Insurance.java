@@ -25,16 +25,22 @@ public class Insurance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "insurance_id", nullable = false)
     private Long id;
+
     @Column(name = "insurance_type", nullable = false)
     private String type;
+
     @Column(name = "insurance_risk", nullable = false)
     private int risk;
+
     @Column(name = "insurance_analysis", nullable = false)
     private String analysis;
+
     @Column(name = "insurance_observation", nullable = false)
     private String observation;
+
     @Column(name = "insurance_created_at", nullable = false)
     private Date createdAt;
+    
     @Column(name = "insurance_validate_at", nullable = false)
     private Date validateAt;
 

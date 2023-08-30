@@ -27,25 +27,34 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cliente_id", nullable = false)
     private Long id;
+
     @Column(name = "cliente_name", nullable = false)
     private String name;
+
     @Column(name = "cliente_age", nullable = false)
     private int age;
+
     @Column(name = "cliente_dependents", nullable = false)
     private int dependents;
+
     @Column(name = "cliente_income", nullable = false)
     private double income;
+
     @Column(name = "cliente_marital_status", nullable = false)
     private String marital_status;
+
     @Column(name = "cliente_created_at", nullable = false)
     private LocalDateTime createdAt;
+
     @Column(name = "cliente_validade_at", nullable = false)
     private LocalDateTime validateAt;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "cliente")
     private List<Vehicle> vehicles;
+
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "cliente")
     private List<House> houses;
+    
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "cliente")
     private List<Insurance> insurances;
 }

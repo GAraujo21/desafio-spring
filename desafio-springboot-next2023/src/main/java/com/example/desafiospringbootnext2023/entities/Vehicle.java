@@ -24,10 +24,13 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "vehicle_id", nullable = false)
     private Long id;
+
     @Column(name = "vehicle_brand", nullable = false)
     private String brand;
+
     @Column(name = "vehicle_model", nullable = false)
     private String model;
+    
     @Column(name = "vehicle_year", nullable = false)
     private int year;
 

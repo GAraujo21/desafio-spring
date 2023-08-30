@@ -24,10 +24,13 @@ public class House {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "house_id", nullable = false)
     private Long id;
+
     @Column(name = "house_ownership_status", nullable = false)
     private String ownership_status;
+
     @Column(name = "house_locations", nullable = false)
     private String locations;
+    
     @Column(name = "house_zipcode", nullable = false)
     private String zipcode;
 
