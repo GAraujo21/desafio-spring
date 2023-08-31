@@ -1,7 +1,6 @@
 package com.example.desafiospringbootnext2023.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,37 +14,64 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.desafiospringbootnext2023.DTO.ClienteDTO;
 import com.example.desafiospringbootnext2023.entities.Cliente;
-import com.example.desafiospringbootnext2023.repository.ClienteRepository;
+import com.example.desafiospringbootnext2023.service.ClienteService;
+
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/clientes")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ClienteController {
 
-    @Autowired
-    public ClienteRepository clienteRepository;
+    //public ClienteRepository clienteRepository; //tiramos a responsabilidade de fazer direto ao repositorio
+    private final ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> getCliente() {
-        return new ResponseEntity<List<Cliente>>(clienteRepository.findAll(), HttpStatus.OK);   
+    public ResponseEntity<List<Cliente>> listAll() {
+        List<Cliente> listCliente = clienteService.listAll();
+        return new ResponseEntity<>(listCliente, HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getCliente(@PathVariable Long id){
-        Optional<Cliente> resp = clienteRepository.findById(id);
-        if(resp.isPresent()){
-            return new ResponseEntity<Cliente>(resp.get(), HttpStatus.OK);
-        }else{
+    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id){
+        Cliente cliente = this.clienteService.getById(id);
+        if (cliente != null) {
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     } 
-
+    
     @PostMapping
-    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
-        clienteRepository.save(cliente);
-        return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+    public ResponseEntity<Cliente> createCliente(@RequestBody @Valid ClienteDTO clienteDTO) {
+        Cliente cliente = clienteService.create(clienteDTO);
+        return new ResponseEntity<>(cliente, HttpStatus.CREATED);
     }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @Valid ClienteDTO clienteDTO){
+        Cliente cliente = clienteService.update(id, clienteDTO);
+        if (cliente != null) {
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id){ //Qual a diferença p/ ResponseEntity<?>
+        if (clienteService.delete(id)) {
+            return new ResponseEntity<>( HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /* 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente){
         Optional<Cliente> respOptional = clienteRepository.findById(id);
@@ -73,6 +99,6 @@ public class ClienteController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
 }
