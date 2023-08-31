@@ -1,6 +1,6 @@
 package com.example.desafiospringbootnext2023.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -44,10 +44,10 @@ public class Cliente {
     private String marital_status;
 
     @Column(name = "cliente_created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "cliente_validade_at", nullable = false)
-    private LocalDateTime validateAt;
+    private LocalDate validateAt;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "cliente")
     private List<Vehicle> vehicles;
