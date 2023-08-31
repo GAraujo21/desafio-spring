@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.desafiospringbootnext2023.entities.Cliente;
@@ -27,7 +26,7 @@ public class ClienteController {
     public ClienteRepository clienteRepository;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> getProdutos() {
+    public ResponseEntity<List<Cliente>> getCliente() {
         return new ResponseEntity<List<Cliente>>(clienteRepository.findAll(), HttpStatus.OK);   
     }
     
@@ -41,14 +40,13 @@ public class ClienteController {
         }
     } 
 
-     @PostMapping
-    public ResponseEntity<Cliente> addProduto(@RequestBody Cliente cliente) {
+    @PostMapping
+    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
         clienteRepository.save(cliente);
         return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente){
         Optional<Cliente> respOptional = clienteRepository.findById(id);
         if (respOptional.isPresent()){
