@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "insurance")
 public class Insurance {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "insurance_id", nullable = false)
     private Long id;
 
@@ -35,7 +35,7 @@ public class Insurance {
     @Column(name = "insurance_analysis", nullable = false)
     private String analysis;
 
-    @Column(name = "insurance_observation", nullable = false)
+    @Column(name = "insurance_observation", nullable = true)
     private String observation;
 
     @Column(name = "insurance_created_at", nullable = false)
@@ -46,6 +46,7 @@ public class Insurance {
 
     @ManyToOne
     @JoinColumn(name="cliente_id", nullable = false)
+    //@JsonBackReference
     private Cliente cliente;
 }
 

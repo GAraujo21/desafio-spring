@@ -1,5 +1,6 @@
 package com.example.desafiospringbootnext2023.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table (name = "vehicle")
 public class Vehicle {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_id", nullable = false)
     private Long id;
 
@@ -34,7 +35,8 @@ public class Vehicle {
     @Column(name = "vehicle_year", nullable = false)
     private int year;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="cliente_id", nullable = false)
+    //@JsonBackReference
     private Cliente cliente;
 }

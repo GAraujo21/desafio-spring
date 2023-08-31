@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "house")
 public class House {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "house_id", nullable = false)
     private Long id;
 
@@ -36,6 +36,7 @@ public class House {
 
     @ManyToOne
     @JoinColumn(name="cliente_id", nullable = false)
+    //@JsonBackReference
     private Cliente cliente;
 
 
