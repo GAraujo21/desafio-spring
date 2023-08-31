@@ -4,7 +4,9 @@ import java.time.LocalDate;
 
 import com.example.desafiospringbootnext2023.entities.Cliente;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,16 +23,16 @@ public class ClienteDTO {
     @Size(min = 2, max = 100)
     private String name;
 
-    @NotBlank
-    @Size(min = 0)
+    @NotNull
+    @Min(0)
     private int age;
 
-    @NotBlank
-    @Size(min = 0)
+    @NotNull
+    @Min(0)
     private int dependents;
 
-    @NotBlank
-    @Size(min = 0)
+    @NotNull
+    @Min(0)
     private double income;
 
     @NotBlank
